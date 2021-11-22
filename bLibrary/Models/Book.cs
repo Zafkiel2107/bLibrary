@@ -1,21 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace bLibrary.Models
 {
     public class Book
     {
-        public int Id { get; set; }
+        [Key, Required, HiddenInput(DisplayValue = false)]
+        public int BookId { get; set; }
+        [Required, StringLength(128), Display(Name = "Название книги")]
         public string Name { get; set; }
+        [Required, StringLength(128), Display(Name = "Автор")]
         public string Author { get; set; }
-        public Genre Genre { get; set; }
+        [Required, Display(Name = "Жанры")]
+        public List<Genre> Genres { get; set; }
+        [Required, Display(Name = "Часть")]
         public int Part { get; set; }
+        [Required, Display(Name = "Страниц")]
         public int Pages { get; set; }
+        [Required, Display(Name = "Язык")]
         public Language Language { get; set; }
+        [Required, StringLength(1024), Display(Name = "Описание")]
         public string Description { get; set; }
-        public List<Review> Reviews;
+        [Required]
+        public List<Review> Reviews { get; set; }
     }
     public enum Genre : byte
     {
