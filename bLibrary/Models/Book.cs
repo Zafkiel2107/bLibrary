@@ -12,6 +12,8 @@ namespace bLibrary.Models
         public string Name { get; set; }
         [Required, StringLength(128), Display(Name = "Автор")]
         public string Author { get; set; }
+        [Required, Display(Name = "Количество рекомендаций")]
+        public int RecommendationsNum { get; set; }
         [Required, Display(Name = "Жанры")]
         public List<Genre> Genres { get; set; }
         [Required, Display(Name = "Часть")]
@@ -31,6 +33,7 @@ namespace bLibrary.Models
     }
     public enum Language : byte
     {
-
+        Русский,
+        Английский
     }
 }

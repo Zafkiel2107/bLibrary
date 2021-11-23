@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace bLibrary.Models
@@ -13,6 +14,7 @@ namespace bLibrary.Models
         public string UserReview { get; set; }
         [Required, Display(Name = "Рекомендация")]
         public bool IsRecommended { get; set; }
+        public DateTime CreateDate { get; set; }
         [Required]
         public Book Book { get; set; }
     }

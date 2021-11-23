@@ -1,0 +1,35 @@
+﻿@model bLibrary.Models.Identity.LoginModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Регистрация</h2>
+@using (Html.BeginForm("", "", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <h4>Регистрация пользователя</h4>
+        <hr />
+        @Html.ValidationSummary(false)
+        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+        <div>
+            @Html.DisplayFor(x => x.Email)
+            <div>
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div>
+            @Html.DisplayFor(x => x.Password)
+            <div>
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+        <div>
+            <div>
+                <input type="submit" value="Войти" />
+            </div>
+        </div>
+    </div>
+}

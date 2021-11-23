@@ -8,6 +8,7 @@ namespace bLibrary.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult MainPage()
         {
             return View();

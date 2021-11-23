@@ -1,0 +1,55 @@
+﻿@model bLibrary.Models.Identity.RegisterModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Регистрация</h2>
+@using (Html.BeginForm("", "", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <h4>Регистрация пользователя</h4>
+        <hr />
+        @Html.ValidationSummary(false)
+        <div>
+            @Html.DisplayFor(x => x.Nickname)
+            <div>
+                @Html.EditorFor(model => model.Nickname)
+                @Html.ValidationMessageFor(model => model.Nickname)
+            </div>
+        </div>
+        <div>
+            @Html.DisplayFor(x => x.Age)
+            <div>
+                @Html.EditorFor(model => model.Age)
+                @Html.ValidationMessageFor(model => model.Age)
+            </div>
+        </div>
+        <div>
+            @Html.DisplayFor(x => x.Email)
+            <div>
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div>
+            @Html.DisplayFor(x => x.Password)
+            <div>
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+        <div>
+            @Html.DisplayFor(x => x.ConfirmPassword)
+            <div>
+                @Html.EditorFor(model => model.ConfirmPassword)
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
+        </div>
+        <div>
+            <div>
+                <input type="submit" value="Зарегистрировать" />
+            </div>
+        </div>
+    </div>
+}

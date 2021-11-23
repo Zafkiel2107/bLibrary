@@ -1,9 +1,10 @@
 ﻿using bLibrary.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 
 namespace bLibrary.DBContext
 {
-    public class BLibraryContext : DbContext
+    public class BLibraryContext : IdentityDbContext
     {
         public BLibraryContext() : base("DefaultConnection") { }
         public DbSet<Book> Books { get; set; }
@@ -11,6 +12,11 @@ namespace bLibrary.DBContext
         public static BLibraryContext CreateContext()
         {
             return new BLibraryContext();
+        }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Roles.Add(new IdentityRole("Admin"));
+            Roles.Add(new IdentityRole("User"));
         }
     }
 }
