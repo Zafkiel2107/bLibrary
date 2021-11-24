@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bLibrary.DBContext;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,7 @@ namespace bLibrary.Controllers
         [HttpGet]
         public ActionResult MainPage()
         {
+            //var i = BLibraryContext.CreateContext().Books.Where(x => x.Name == "123");
             return View();
         }
     }

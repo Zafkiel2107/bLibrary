@@ -5,7 +5,7 @@ namespace bLibrary.Models.Identity
     public class RegisterModel
     {
         [Required, MaxLength(128, ErrorMessage = "Требуется сменить никнейм")]
-        public string Nickname { get; set; }
+        public string UserName { get; set; }
         [Required, DataType(DataType.EmailAddress, ErrorMessage = "Задана неверная почта")]
         public string Email { get; set; }
         [Required, MinLength(5, ErrorMessage = "Задан неверный пароль"), DataType(DataType.Password)]
@@ -18,7 +18,7 @@ namespace bLibrary.Models.Identity
     public class LoginModel
     {
         [Required]
-        public string Email { get; set; }
+        public string UserName { get; set; }
         [Required, DataType(DataType.Password)]
         public string Password { get; set; }
     }

@@ -3,52 +3,58 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Регистрация</h2>
-@using (Html.BeginForm("", "", FormMethod.Post))
+<h2>Форма регистрации</h2>
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div>
-        <h4>Регистрация пользователя</h4>
         <hr />
         @Html.ValidationSummary(false)
         <div>
-            @Html.DisplayFor(x => x.Nickname)
+            @Html.LabelFor(x => x.UserName)
             <div>
-                @Html.EditorFor(model => model.Nickname)
-                @Html.ValidationMessageFor(model => model.Nickname)
+                @Html.EditorFor(model => model.UserName)
+                @Html.ValidationMessageFor(model => model.UserName)
             </div>
         </div>
         <div>
-            @Html.DisplayFor(x => x.Age)
+            @Html.LabelFor(x => x.Age)
             <div>
                 @Html.EditorFor(model => model.Age)
                 @Html.ValidationMessageFor(model => model.Age)
             </div>
         </div>
         <div>
-            @Html.DisplayFor(x => x.Email)
+            @Html.LabelFor(x => x.Email)
             <div>
                 @Html.EditorFor(model => model.Email)
                 @Html.ValidationMessageFor(model => model.Email)
             </div>
         </div>
         <div>
-            @Html.DisplayFor(x => x.Password)
+            @Html.LabelFor(x => x.Password)
             <div>
                 @Html.EditorFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)
             </div>
         </div>
         <div>
-            @Html.DisplayFor(x => x.ConfirmPassword)
+            @Html.LabelFor(x => x.ConfirmPassword)
             <div>
                 @Html.EditorFor(model => model.ConfirmPassword)
                 @Html.ValidationMessageFor(model => model.ConfirmPassword)
             </div>
         </div>
+        <br />
         <div>
             <div>
-                <input type="submit" value="Зарегистрировать" />
+                <input type="submit" value="Зарегистрироваться" />
+            </div>
+        </div>
+        <br />
+        <div>
+            <div>
+                @Html.ActionLink("Уже зарегистрированы?", "Login", "Account")
             </div>
         </div>
     </div>

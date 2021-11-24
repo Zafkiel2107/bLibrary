@@ -9,10 +9,17 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar-collapse collapse">
+    <div class="navbar-nav">
         <ul class="nav navbar-nav">
             <li>@Html.ActionLink("Домашняя страница", "MainPage", "Home")</li>
-            <li>@Html.ActionLink("Войти", "Login", "Account")</li>
+            @if(User.Identity.IsAuthenticated)
+            {
+                <li>@Html.ActionLink("Выйти", "Logout", "Account")</li>
+            }
+            else
+            {
+                <li>@Html.ActionLink("Войти", "Login", "Account")</li>
+            }
         </ul>
     </div>
     <div class="container body-content">

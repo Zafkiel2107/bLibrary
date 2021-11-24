@@ -150,6 +150,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -160,6 +161,14 @@
     <Compile Include="Migrations\202111221442383_1.cs" />
     <Compile Include="Migrations\202111221442383_1.designer.cs">
       <DependentUpon>202111221442383_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111241407368_2.cs" />
+    <Compile Include="Migrations\202111241407368_2.designer.cs">
+      <DependentUpon>202111241407368_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111241439116_3.cs" />
+    <Compile Include="Migrations\202111241439116_3.designer.cs">
+      <DependentUpon>202111241439116_3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Book.cs" />
@@ -255,6 +264,12 @@
     <EmbeddedResource Include="Migrations\202111221442383_1.resx">
       <DependentUpon>202111221442383_1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111241407368_2.resx">
+      <DependentUpon>202111241407368_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111241439116_3.resx">
+      <DependentUpon>202111241439116_3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -282,6 +297,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties content_4bootstrap_1css_1map__JsonSchema="https://json.schemastore.org/travis.json" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -26,6 +26,10 @@ namespace bLibrary.Models
         public string Description { get; set; }
         [Required]
         public List<Review> Reviews { get; set; }
+        public Book()
+        {
+            Reviews = new List<Review>();
+        }
     }
     public enum Genre : byte
     {

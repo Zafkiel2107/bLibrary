@@ -13,10 +13,5 @@ namespace bLibrary.DBContext
         {
             return new BLibraryContext();
         }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            Roles.Add(new IdentityRole("Admin"));
-            Roles.Add(new IdentityRole("User"));
-        }
     }
 }

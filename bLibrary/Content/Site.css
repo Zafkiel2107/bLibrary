@@ -13,17 +13,17 @@ nav {
     padding-left: 10px;
 }
 
-    .menu ul {
-        list-style: none;
-    }
+.menu ul {
+    list-style: none;
+}
 
-    .menu li {
-        display: inline;
-    }
+.menu li {
+    display: inline;
+}
 
-    .menu a:hover {
-        color: red;
-    }
+.menu a:hover {
+    color: red;
+}
 
 table {
     vertical-align: middle;

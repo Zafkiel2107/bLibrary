@@ -1,10 +1,14 @@
 ﻿using bLibrary.Models.Identity;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -13,7 +17,7 @@ namespace bLibrary.Controllers
 {
     public class AccountController : Controller
     {
-        private AppUserManager UserManager
+        private AppUserManager AppUserManager
         {
             get { return HttpContext.GetOwinContext().GetUserManager<AppUserManager>(); }
         }
@@ -39,11 +43,12 @@ namespace bLibrary.Controllers
             {
                 User user = new User
                 {
-                    Nickname = registerModel.Nickname,
+                    UserName = registerModel.UserName,
                     Email = registerModel.Email,
                     Age = registerModel.Age,
+                    PasswordHash = GetPasswordHash(registerModel.Password)
                 };
-                IdentityResult identityResult = await UserManager.CreateAsync(user, registerModel.Password);
+                IdentityResult identityResult = await AppUserManager.CreateAsync(user, registerModel.Password);
                 if(identityResult.Succeeded)
                 {
                     return RedirectToAction("MainPage", "Home");
@@ -56,14 +61,14 @@ namespace bLibrary.Controllers
         {
             if(ModelState.IsValid)
             {
-                User user = await UserManager.FindAsync(loginModel.Email, loginModel.Password);
+                User user = await AppUserManager.FindAsync(loginModel.UserName, loginModel.Password);
                 if(user == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Страница не найдена");
                 }
                 else
                 {
-                    ClaimsIdentity claimsIdentity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    ClaimsIdentity claimsIdentity = await AppUserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
                     AuthenticationManager.SignOut();
                     AuthenticationManager.SignIn(new AuthenticationProperties
                     {
@@ -84,6 +89,12 @@ namespace bLibrary.Controllers
         {
             AuthenticationManager.SignOut();
             return RedirectToAction("MainPage", "Home");
+        }
+        public string GetPasswordHash(string password)
+        {
+            SHA256 sha256 = SHA256.Create();
+            byte[] hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return Convert.ToBase64String(hash);
         }
     }
 }
