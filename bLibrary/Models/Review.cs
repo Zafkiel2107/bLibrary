@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bLibrary.Models.Identity;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -17,6 +18,8 @@ namespace bLibrary.Models
         public DateTime CreateDate { get; set; }
         [Required]
         public Book Book { get; set; }
+        [Required]
+        public User User { get; set; }
     }
     public enum Status : byte
     {
