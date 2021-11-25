@@ -15,6 +15,7 @@ namespace bLibrary.Models
         public string UserReview { get; set; }
         [Required, Display(Name = "Рекомендация")]
         public bool IsRecommended { get; set; }
+        [Required, DataType(DataType.Date), Display(Name = "Дата написания")]
         public DateTime CreateDate { get; set; }
         [Required]
         public Book Book { get; set; }

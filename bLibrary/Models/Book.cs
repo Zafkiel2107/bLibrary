@@ -24,16 +24,17 @@ namespace bLibrary.Models
         public Language Language { get; set; }
         [Required, StringLength(1024), Display(Name = "Описание")]
         public string Description { get; set; }
-        [Required]
+        [Required, Display(Name = "Ссылка на обложку")]
+        public string CoverLink { get; set; }
+        [Required, Display(Name = "Ссылка на книгу")]
+        public string BookLink { get; set; }
+        [Required, Display(Name = "Отзывы")]
         public List<Review> Reviews { get; set; }
         public Book()
         {
+            RecommendationsNum = 0;
             Reviews = new List<Review>();
         }
-    }
-    public enum Genre : byte
-    {
-
     }
     public enum Language : byte
     {

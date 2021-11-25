@@ -1,10 +1,8 @@
 ﻿using bLibrary.Models.Identity;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;

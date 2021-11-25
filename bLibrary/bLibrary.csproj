@@ -153,6 +153,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminBookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DBContext\BLibraryContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -174,8 +175,13 @@
     <Compile Include="Migrations\202111241535545_4.designer.cs">
       <DependentUpon>202111241535545_4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111251505085_5.cs" />
+    <Compile Include="Migrations\202111251505085_5.designer.cs">
+      <DependentUpon>202111251505085_5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Identity\AppUserManager.cs" />
     <Compile Include="Models\Identity\Model.cs" />
     <Compile Include="Models\Identity\User.cs" />
@@ -200,6 +206,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Files\Covers\1144756.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -208,6 +215,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Files\EBooks\90737383.a4.pdf" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -233,6 +241,7 @@
     <Content Include="Views\Home\MainPage.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\AdminBook\GetViewCreateBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -276,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111241535545_4.resx">
       <DependentUpon>202111241535545_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111251505085_5.resx">
+      <DependentUpon>202111251505085_5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
