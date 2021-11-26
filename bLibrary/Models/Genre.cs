@@ -8,7 +8,7 @@ namespace bLibrary.Models
     {
         [Key, Required, HiddenInput(DisplayValue = false)]
         public int GenreId { get; set; }
-        [Required, StringLength(128)]
+        [Required, StringLength(128), Display(Name = "Жанр")]
         public string GenreName { get; set; }
         public List<Book> Books { get; set; }
         public Genre()

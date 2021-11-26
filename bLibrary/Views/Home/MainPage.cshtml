@@ -1,3 +1,29 @@
-﻿@{
+﻿@model IEnumerable<bLibrary.Models.Book>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <hr />
+        @Html.ValidationSummary(false)
+        <div>
+            <table>
+                <tr>
+                    @foreach (bLibrary.Models.Book book in Model)
+                    {
+
+                        <td>
+                            <input type="image" onclick="window.open('/Book/GetBook/@book.BookId')" src="@System.Configuration.ConfigurationManager.AppSettings["Cover"]@book.CoverLink" />
+                            <br />
+                            @Html.Label(book.Name)
+                        </td>
+                    }
+                </tr>
+            </table>
+        </div>
+    </div>
 }

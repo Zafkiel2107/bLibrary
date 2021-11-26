@@ -14,8 +14,8 @@ namespace bLibrary.Models
         public string Author { get; set; }
         [Required, Display(Name = "Количество рекомендаций")]
         public int RecommendationsNum { get; set; }
-        [Required, Display(Name = "Жанры")]
-        public List<Genre> Genres { get; set; }
+        [Required, Display(Name = "Жанр")]
+        public Genre Genre { get; set; }
         [Required, Display(Name = "Часть")]
         public int Part { get; set; }
         [Required, Display(Name = "Страниц")]

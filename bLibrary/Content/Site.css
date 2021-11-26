@@ -42,6 +42,10 @@ input {
     width: 150px;
 }
 
+h2 {
+    text-align: center;
+}
+
 .field-validation-error {
     color: #b94a48;
 }

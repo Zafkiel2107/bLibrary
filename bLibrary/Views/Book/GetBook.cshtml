@@ -1,0 +1,80 @@
+﻿@model bLibrary.Models.Book
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <hr />
+        @Html.ValidationSummary(false)
+        <div>
+            <table>
+                <tr>
+                    <td width="600">
+                        <img src="@Url.Content(System.Configuration.ConfigurationManager.AppSettings["Cover"]+Model.CoverLink)" />
+                    </td>
+                    <td width="400">
+                        <p><b>@Html.LabelFor(x => x.Name) :</b></p>
+                        <p><b>@Html.LabelFor(x => x.Author) :</b></p>
+                        <p><b>@Html.LabelFor(x => x.RecommendationsNum) :</p>
+                        <p><b>@Html.LabelFor(x => x.Genre.GenreName) :</b></p>
+                        <p><b>@Html.LabelFor(x => x.Part) :</b></p>
+                        <p><b>@Html.LabelFor(x => x.Pages) :</b></p>
+                        <p><b>@Html.LabelFor(x => x.Language) :</b></p>
+                    </td>
+                    <td>
+                        <p>@Html.DisplayTextFor(x => x.Name)</p>
+                        <p>@Html.DisplayTextFor(x => x.Author)</p>
+                        <p>@Html.DisplayTextFor(x => x.RecommendationsNum)</p>
+                        <p>@Html.DisplayTextFor(x => x.Genre.GenreName)</p>
+                        <p>@Html.DisplayTextFor(x => x.Part)</p>
+                        <p>@Html.DisplayTextFor(x => x.Pages)</p>
+                        <p>@Html.DisplayTextFor(x => x.Language)</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <div>
+            <p>@Html.DisplayTextFor(x => x.Description)</p>
+        </div>
+        <br />
+        <div>
+            <table>
+                <tr>
+                    <td width="600">
+                        <b><a href="@Url.Content(System.Configuration.ConfigurationManager.AppSettings["EBook"]+Model.BookLink)">Читать онлайн</a></b>
+                        <br/>
+                        <b><a download="@Model.Name" href="@Url.Content(System.Configuration.ConfigurationManager.AppSettings["EBook"] + Model.BookLink)">Скачать в PDF</a></b>
+                    </td>
+                    <td td width="400">
+                        @if(User.Identity.IsAuthenticated)
+                        {
+                            <b>@Html.ActionLink("Оставить комментарий", "", "")</b>
+                        }
+                        else
+                        {
+                            <b style="color: red">Чтобы оставить комментарий вы должны быть зарегистрированны</b>
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table>
+                @foreach (var review in Model.Reviews)
+                {
+                    <tr>
+                        @*<td>@review.User.UserName</td>*@
+                        <td>@review.CreateDate</td>
+                        <td>@review.IsRecommended</td>
+                        <td>@review.UserReview</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+}

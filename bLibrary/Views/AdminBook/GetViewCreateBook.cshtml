@@ -1,4 +1,4 @@
-﻿@model bLibrary.Models.Book 
+﻿@model bLibrary.Models.Book
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -51,9 +51,9 @@
         </div>
         <br />
         <div>
-            @Html.LabelFor(x => x.Genres)
+            @Html.LabelFor(x => x.Genre.GenreName)
             <div>
-                @Html.ListBoxFor(model => model.Genres, new SelectList(ViewBag.GenresList))
+                @Html.DropDownListFor(model => model.Genre.GenreName, new SelectList(ViewBag.GenresList))
             </div>
         </div>
         <br />

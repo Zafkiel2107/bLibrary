@@ -153,6 +153,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\AdminBookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DBContext\BLibraryContext.cs" />
@@ -178,6 +179,10 @@
     <Compile Include="Migrations\202111251505085_5.cs" />
     <Compile Include="Migrations\202111251505085_5.designer.cs">
       <DependentUpon>202111251505085_5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111261326562_6.cs" />
+    <Compile Include="Migrations\202111261326562_6.designer.cs">
+      <DependentUpon>202111261326562_6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Book.cs" />
@@ -207,6 +212,8 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Files\Covers\1144756.jpg" />
+    <Content Include="Files\Covers\BC4_1619331325.jpg" />
+    <Content Include="Files\Layout\library.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -216,6 +223,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Files\EBooks\90737383.a4.pdf" />
+    <Content Include="Files\EBooks\Martin_Robert_-_CHistyj_kod_Sozdanie_analiz_i_refa.pdf" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -242,6 +250,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\AdminBook\GetViewCreateBook.cshtml" />
+    <Content Include="Views\Book\GetBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -288,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111251505085_5.resx">
       <DependentUpon>202111251505085_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111261326562_6.resx">
+      <DependentUpon>202111261326562_6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

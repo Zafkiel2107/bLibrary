@@ -10,17 +10,30 @@
 </head>
 <body>
     <div class="navbar-nav">
-        <ul class="nav navbar-nav">
-            <li>@Html.ActionLink("Домашняя страница", "MainPage", "Home")</li>
-            @if(User.Identity.IsAuthenticated)
-            {
-                <li>@Html.ActionLink("Выйти", "Logout", "Account")</li>
-            }
-            else
-            {
-                <li>@Html.ActionLink("Войти", "Login", "Account")</li>
-            }
-        </ul>
+        <table  class="nav navbar-nav">
+            <tr>
+                <td align="center" width="580px">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <font size="5">@Html.ActionLink("Выйти", "Logout", "Account")</font>
+                    }
+                    else
+                    {
+                        <font size="5">@Html.ActionLink("Войти", "Login", "Account")</font>
+                    }
+                </td>
+                <td align="center" width="580px"><input type="image" onclick="location.href = '@Url.Action("MainPage", "Home")'" src="~/Files/Layout/library.jpg" /></td>
+                <td align="center" width="580px">
+                    @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+                    {
+                        <input placeholder="Поиск по произведениям" type="text" name="name">
+                        <br />
+                        <br />
+                        <input type="submit" value="Поиск" />
+                    }
+                </td>
+            </tr>
+        </table>
     </div>
     <div class="container body-content">
         @RenderBody()

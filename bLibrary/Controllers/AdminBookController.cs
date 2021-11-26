@@ -1,6 +1,7 @@
 ﻿using bLibrary.DBContext;
 using bLibrary.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,16 +11,17 @@ namespace bLibrary.Controllers
 {
     public class AdminBookController : Controller
     {
-        private readonly BLibraryContext bLibraryContext = new BLibraryContext();
+        private readonly BLibraryContext bLibraryContext = BLibraryContext.CreateContext();
         [HttpGet]
         public ActionResult GetViewCreateBook()
         {
-            ViewBag.GenresList = bLibraryContext.Genres.Select(x => x.GenreName);
+            ViewBag.GenresList = bLibraryContext.Genres.Select(x => x.GenreName).OrderBy(x => x);
             return View();
         }
         [HttpPost]
         public async Task<ActionResult> CreateBook(Book book)
         {
+            book.Genre = bLibraryContext.Genres.Where(x => x.GenreName == book.Genre.GenreName).FirstOrDefault();
             try
             {
                 if(!book.BookLink.Contains("pdf") && !book.CoverLink.Contains("jpg"))
