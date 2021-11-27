@@ -22,7 +22,20 @@
                         <font size="5">@Html.ActionLink("Войти", "Login", "Account")</font>
                     }
                 </td>
-                <td align="center" width="580px"><input type="image" onclick="location.href = '@Url.Action("MainPage", "Home")'" src="~/Files/Layout/library.jpg" /></td>
+                @*&& User.IsInRole("Admin"))*@
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td align="center" width="580px">
+                        <font size="5">@Html.ActionLink("Панель администратора", "AdminPanel", "Layout")</font>
+                    </td>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td align="center" width="580px">
+                        <font size="5">@Html.ActionLink("Настройки аккаунта", "Settings", "Layout")</font>
+                    </td>
+                }
+                <td align="center" width="580px"><input type="image" onclick="location.href='/Home/MainPage'" src="~/Files/Layout/library.jpg" /></td>
                 <td align="center" width="580px">
                     @using (Html.BeginForm("Search", "Home", FormMethod.Post))
                     {

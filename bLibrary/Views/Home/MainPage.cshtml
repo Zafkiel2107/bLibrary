@@ -15,9 +15,8 @@
                 <tr>
                     @foreach (bLibrary.Models.Book book in Model)
                     {
-
                         <td>
-                            <input type="image" onclick="window.open('/Book/GetBook/@book.BookId')" src="@System.Configuration.ConfigurationManager.AppSettings["Cover"]@book.CoverLink" />
+                            <input type="image" onclick="location.href = '/Book/GetBook/@book.BookId'; return false;" src="@System.Configuration.ConfigurationManager.AppSettings["Cover"]@book.CoverLink" />
                             <br />
                             @Html.Label(book.Name)
                         </td>

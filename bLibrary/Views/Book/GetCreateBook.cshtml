@@ -1,0 +1,84 @@
+﻿@model bLibrary.Models.Book
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Панель создания книги</h2>
+@using (Html.BeginForm("CreateBook", "Book", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <hr />
+        @Html.ValidationSummary(false)
+        <div>
+            @Html.LabelFor(x => x.Name)
+            <div>
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+        <br />
+        <div>
+            @Html.LabelFor(x => x.Author)
+            <div>
+                @Html.EditorFor(model => model.Author)
+                @Html.ValidationMessageFor(model => model.Author)
+            </div>
+        </div>
+        <br />
+        <div>
+            @Html.LabelFor(x => x.Part)
+            <div>
+                @Html.EditorFor(model => model.Part)
+                @Html.ValidationMessageFor(model => model.Part)
+            </div>
+        </div>
+        <br />
+        <div>
+            @Html.LabelFor(x => x.Pages)
+            <div>
+                @Html.EditorFor(model => model.Pages)
+                @Html.ValidationMessageFor(model => model.Pages)
+            </div>
+        </div>
+        <br />
+        <div>
+            @Html.LabelFor(x => x.Language)
+            <div>
+                @Html.EnumDropDownListFor(model => model.Language)
+                @Html.ValidationMessageFor(model => model.Language)
+            </div>
+        </div>
+        <br />
+        <div>
+            @Html.LabelFor(x => x.Genre.GenreName)
+            <div>
+                @Html.DropDownListFor(model => model.Genre.GenreName, new SelectList(ViewBag.GenresList))
+            </div>
+        </div>
+        <br />
+        <div>
+            @Html.LabelFor(x => x.Description)
+            <div>
+                @Html.TextAreaFor(model => model.Description)
+            </div>
+        </div>
+        <br />
+        <div>
+            @Html.LabelFor(x => x.CoverLink)
+            <div>
+                <input type="file" name="CoverLink" />
+            </div>
+            @Html.LabelFor(x => x.BookLink)
+            <div>
+                <input type="file" name="BookLink" />
+            </div>
+        </div>
+        <br />
+        <div>
+            <div>
+                <input type="submit" value="Создать" />
+            </div>
+        </div>
+    </div>
+}

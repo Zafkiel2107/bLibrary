@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Панель администратора</h2>
+@using (Html.BeginForm("AdminPanel", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <hr />
+        @Html.ValidationSummary(false)
+        <div>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <table border="1" width="600px">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            @foreach (var user in ViewBag.Roles)
+                            {
+                                <tr>
+                                    <td style="border: 1px solid">@user.UserName</td>
+                                    <td style="border: 1px solid">@Html.ActionLink("Изменить", "EditRole", "Account")</td>
+                                    <td style="border: 1px solid">@Html.ActionLink("Удалить", "DeleteRole", "Account")</td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                    <td>
+                        <table border="1" width="600px">
+                            <tr>
+                                <td>@Html.ActionLink("Создать книгу", "GetCreateBook", "Book")</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            @foreach (var book in ViewBag.Books)
+                            {
+                                <tr>
+                                    <td style="border: 1px solid">@book.Name</td>
+                                    <td style="border: 1px solid"><input type="button" value="Изменить" onclick="location.href='/Book/GetEditBook/@book.BookId'" /></td>
+                                    <td style="border: 1px solid"><input type="button" value="Удалить" onclick="location.href='/Book/DeleteBook/@book.BookId'" /></td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+}

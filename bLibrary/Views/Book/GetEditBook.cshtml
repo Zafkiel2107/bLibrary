@@ -4,12 +4,13 @@
 }
 
 <h2>Панель создания книги</h2>
-@using (Html.BeginForm("CreateBook", "AdminBook", FormMethod.Post))
+@using (Html.BeginForm("EditBook", "Book", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div>
         <hr />
         @Html.ValidationSummary(false)
+        @Html.HiddenFor(x => x.BookId)
         <div>
             @Html.LabelFor(x => x.Name)
             <div>
