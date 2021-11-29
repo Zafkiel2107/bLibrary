@@ -10,11 +10,11 @@ namespace bLibrary.Controllers
     public class LayoutController : Controller
     {
         private readonly BLibraryContext bLibraryContext = BLibraryContext.CreateContext();
-        [HttpGet, Authorize] //(Roles = "Admin")]
+        [HttpGet, Authorize(Roles = "Admin")]
         public ActionResult AdminPanel()
         {
-            ViewBag.Books = bLibraryContext.Books.Include(x => x.Genre);
-            ViewBag.Roles = bLibraryContext.Users.Include(x => x.Roles);
+            ViewBag.Books = bLibraryContext.Books;
+            ViewBag.Users = bLibraryContext.Users;
             return View();
         }
         [HttpGet, Authorize]
@@ -28,7 +28,7 @@ namespace bLibrary.Controllers
         {
             bLibraryContext.Entry(identityUser).State = EntityState.Modified;
             await bLibraryContext.SaveChangesAsync();
-            return RedirectToAction("MainPage", "Home");
+            return RedirectToAction("Settings", "Layout");
         }
     }
 }

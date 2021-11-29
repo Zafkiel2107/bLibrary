@@ -22,8 +22,7 @@
                         <font size="5">@Html.ActionLink("Войти", "Login", "Account")</font>
                     }
                 </td>
-                @*&& User.IsInRole("Admin"))*@
-                @if (User.Identity.IsAuthenticated)
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                 {
                     <td align="center" width="580px">
                         <font size="5">@Html.ActionLink("Панель администратора", "AdminPanel", "Layout")</font>

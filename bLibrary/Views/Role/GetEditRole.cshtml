@@ -1,0 +1,28 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Изменение роли</h2>
+@using (Html.BeginForm("EditRole", "Role", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <hr />
+        @Html.ValidationSummary(false)
+        @Html.HiddenFor(x => x.UserId)
+        <div>
+            @Html.LabelFor(x => x.RoleId)
+            <div>
+                @Html.DropDownListFor(model => model.RoleId, new SelectList(ViewBag.RoleList))
+                @Html.ValidationMessageFor(model => model.RoleId)
+            </div>
+        </div>
+        <br />
+        <div>
+            <div>
+                <input type="submit" value="Создать" />
+            </div>
+        </div>
+    </div>
+}

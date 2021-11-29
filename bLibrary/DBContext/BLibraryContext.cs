@@ -6,7 +6,7 @@ namespace bLibrary.DBContext
 {
     public class BLibraryContext : IdentityDbContext
     {
-        private BLibraryContext() : base("DefaultConnection") { }
+        public BLibraryContext() : base("DefaultConnection") { }
         public DbSet<Book> Books { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Genre> Genres { get; set; }

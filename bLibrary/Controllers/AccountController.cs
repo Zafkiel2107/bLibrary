@@ -1,5 +1,7 @@
-﻿using bLibrary.Models.Identity;
+﻿using bLibrary.DBContext;
+using bLibrary.Models.Identity;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
@@ -46,8 +48,9 @@ namespace bLibrary.Controllers
                     Age = registerModel.Age,
                     PasswordHash = GetPasswordHash(registerModel.Password)
                 };
-                IdentityResult identityResult = await AppUserManager.CreateAsync(user, registerModel.Password);
-                if(identityResult.Succeeded)
+                IdentityResult identityUserResult = await AppUserManager.CreateAsync(user, registerModel.Password);
+                IdentityResult identityRoleResult = await AppUserManager.AddToRoleAsync(user.Id, "User");
+                if(identityUserResult.Succeeded && identityRoleResult.Succeeded)
                 {
                     return RedirectToAction("MainPage", "Home");
                 }

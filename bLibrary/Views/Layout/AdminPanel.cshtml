@@ -13,34 +13,27 @@
             <table width="100%">
                 <tr>
                     <td>
-                        <table border="1" width="600px">
-                            <tr>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            @foreach (var user in ViewBag.Roles)
+                        <table border="1" width="400px">
+                            @foreach (var user in ViewBag.Users)
                             {
                                 <tr>
                                     <td style="border: 1px solid">@user.UserName</td>
-                                    <td style="border: 1px solid">@Html.ActionLink("Изменить", "EditRole", "Account")</td>
-                                    <td style="border: 1px solid">@Html.ActionLink("Удалить", "DeleteRole", "Account")</td>
+                                    <td style="border: 1px solid"><input style="float: right" type="button" value="Изменить" onclick="location.href='/Role/GetEditRole/@user.Id'" /></td>
                                 </tr>
                             }
                         </table>
                     </td>
                     <td>
-                        <table border="1" width="600px">
+                        <table border="1" width="850px">
                             <tr>
                                 <td>@Html.ActionLink("Создать книгу", "GetCreateBook", "Book")</td>
-                                <td></td>
-                                <td></td>
                             </tr>
                             @foreach (var book in ViewBag.Books)
                             {
                                 <tr>
                                     <td style="border: 1px solid">@book.Name</td>
-                                    <td style="border: 1px solid"><input type="button" value="Изменить" onclick="location.href='/Book/GetEditBook/@book.BookId'" /></td>
-                                    <td style="border: 1px solid"><input type="button" value="Удалить" onclick="location.href='/Book/DeleteBook/@book.BookId'" /></td>
+                                    <td style="border: 1px solid"><input style="float: right" type="button" value="Изменить" onclick="location.href='/Book/GetEditBook/@book.BookId'" /></td>
+                                    <td style="border: 1px solid"><input style="float: right" type="button" value="Удалить" onclick="location.href='/Book/DeleteBook/@book.BookId'" /></td>
                                 </tr>
                             }
                         </table>
