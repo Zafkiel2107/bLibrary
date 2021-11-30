@@ -22,4 +22,19 @@ namespace bLibrary.Models.Identity
         [Required, DataType(DataType.Password), Display(Name = "Пароль")]
         public string Password { get; set; }
     }
+    public class ForgotPasswordModel
+    {
+        [Required, DataType(DataType.EmailAddress, ErrorMessage = "Задана неверная почта"), Display(Name = "Электронная почта")]
+        public string Email { get; set; }
+    }
+    public class ResetPasswordModel
+    {
+        [Required, DataType(DataType.EmailAddress, ErrorMessage = "Задана неверная почта"), Display(Name = "Электронная почта")]
+        public string Email { get; set; }
+        [Required, MinLength(5, ErrorMessage = "Задан неверный пароль"), DataType(DataType.Password), Display(Name = "Пароль")]
+        public string Password { get; set; }
+        [Required, DataType(DataType.Password), Compare("Password", ErrorMessage = "Пароли не совпадают"), Display(Name = "Повторить пароль")]
+        public string ConfirmPassword { get; set; }
+        public string Code { get; set; }
+    }
 }

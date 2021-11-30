@@ -16,7 +16,7 @@ namespace bLibrary.Controllers
             ViewBag.Title = "Популярные произведения";
             return View(books);
         }
-        [HttpPost]
+        [HttpGet]
         public ActionResult Search(string name)
         {
             IEnumerable<Book> books = bLibraryContext.Books.Where(x => x.Name.Contains(name));
@@ -25,4 +25,4 @@ namespace bLibrary.Controllers
         }
     }
 }
-//TODO: ТЕСТЫ, АСИНХРОННЫЕ МЕТОДЫ К БД
+//TODO: Отзывы, восстановление пароля, ошибки на клиенте, ТЕСТЫ, АСИНХРОННЫЕ МЕТОДЫ К БД

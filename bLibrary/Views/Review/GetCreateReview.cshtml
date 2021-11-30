@@ -1,0 +1,47 @@
+﻿@model bLibrary.Models.Review 
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Создание отзыва</h2>
+@using (Html.BeginForm("CreateReview", "Review", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <hr />
+        @Html.ValidationSummary(false)
+        @Html.DisplayFor(x => x.Book)
+        @Html.TextBoxFor(x => x.User)
+        <div>
+            @Html.LabelFor(x => x.Status)
+            <div>
+                @Html.EnumDropDownListFor(model => model.Status)
+                @Html.ValidationMessageFor(model => model.Status)
+            </div>
+        </div>
+        <br />
+        <div>
+            @Html.LabelFor(x => x.UserReview)
+            <div>
+                @Html.TextAreaFor(model => model.UserReview)
+                @Html.ValidationMessageFor(model => model.UserReview)
+            </div>
+        </div>
+        <br />
+        <div>
+            @Html.LabelFor(x => x.IsRecommended)
+            <div>
+                @Html.RadioButtonFor(x => x.IsRecommended, true)
+                <span>Рекомендую</span> <br />
+                @Html.RadioButtonFor(x => x.IsRecommended, false)
+                <span>Не рекомендую</span> <br />
+                @Html.ValidationMessageFor(model => model.UserReview)
+            </div>
+        </div>
+        <br />
+        <div>
+            <div>
+                <input type="submit" value="Создать" />
+            </div>
+        </div>
+    </div>
+}

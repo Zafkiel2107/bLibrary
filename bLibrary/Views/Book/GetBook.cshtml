@@ -19,7 +19,7 @@
                     <td width="400">
                         <p><b>@Html.LabelFor(x => x.Name) :</b></p>
                         <p><b>@Html.LabelFor(x => x.Author) :</b></p>
-                        <p><b>@Html.LabelFor(x => x.RecommendationsNum) :</p>
+                        <p><b>@Html.LabelFor(x => x.RecommendationsNum) :</b></p>
                         <p><b>@Html.LabelFor(x => x.Genre.GenreName) :</b></p>
                         <p><b>@Html.LabelFor(x => x.Part) :</b></p>
                         <p><b>@Html.LabelFor(x => x.Pages) :</b></p>
@@ -51,14 +51,7 @@
                         <b><a download="@Model.Name" href="@Url.Content(System.Configuration.ConfigurationManager.AppSettings["EBook"] + Model.BookLink)">Скачать в PDF</a></b>
                     </td>
                     <td td width="400">
-                        @if(User.Identity.IsAuthenticated)
-                        {
-                            <b>@Html.ActionLink("Оставить комментарий", "", "")</b>
-                        }
-                        else
-                        {
-                            <b style="color: red">Чтобы оставить комментарий вы должны быть зарегистрированны</b>
-                        }
+                        <b><a href="/Review/GetCreateReview/@Model.BookId">Оставить отзыв о книге</a></b>
                     </td>
                 </tr>
             </table>

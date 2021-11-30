@@ -21,6 +21,10 @@ namespace bLibrary.Models
         public Book Book { get; set; }
         [Required]
         public User User { get; set; }
+        public Review()
+        {
+            this.CreateDate = DateTime.Now;
+        }
     }
     public enum Status : byte
     {
