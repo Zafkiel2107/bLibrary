@@ -8,25 +8,25 @@ namespace bLibrary.Models
     {
         [Key, Required, HiddenInput(DisplayValue = false)]
         public int BookId { get; set; }
-        [Required, StringLength(128), Display(Name = "Название книги")]
+        [Required(ErrorMessage = "Поле должно быть заполнено"), StringLength(128, ErrorMessage = "Недопустимая длина строки"), Display(Name = "Название книги")]
         public string Name { get; set; }
-        [Required, StringLength(128), Display(Name = "Автор")]
+        [Required(ErrorMessage = "Поле должно быть заполнено"), StringLength(128, ErrorMessage = "Недопустимая длина строки"), Display(Name = "Автор")]
         public string Author { get; set; }
         [Required, Display(Name = "Количество рекомендаций")]
         public int RecommendationsNum { get; set; }
-        [Required, Display(Name = "Жанр")]
+        [Required(ErrorMessage = "Поле должно быть заполнено"), Display(Name = "Жанр")]
         public Genre Genre { get; set; }
-        [Required, Display(Name = "Часть")]
+        [Required(ErrorMessage = "Поле должно быть заполнено"), Display(Name = "Часть")]
         public int Part { get; set; }
-        [Required, Display(Name = "Страниц")]
+        [Required(ErrorMessage = "Поле должно быть заполнено"), Display(Name = "Страниц")]
         public int Pages { get; set; }
-        [Required, Display(Name = "Язык")]
+        [Required(ErrorMessage = "Поле должно быть заполнено"), Display(Name = "Язык")]
         public Language Language { get; set; }
-        [Required, StringLength(1024), Display(Name = "Описание")]
+        [Required(ErrorMessage = "Поле должно быть заполнено"), StringLength(1024, ErrorMessage = "Недопустимая длина строки"), Display(Name = "Описание")]
         public string Description { get; set; }
-        [Required, Display(Name = "Ссылка на обложку")]
+        [Required(ErrorMessage = "Поле должно быть заполнено"), Display(Name = "Ссылка на обложку")]
         public string CoverLink { get; set; }
-        [Required, Display(Name = "Ссылка на книгу")]
+        [Required(ErrorMessage = "Поле должно быть заполнено"), Display(Name = "Ссылка на книгу")]
         public string BookLink { get; set; }
         [Required, Display(Name = "Отзывы")]
         public List<Review> Reviews { get; set; }

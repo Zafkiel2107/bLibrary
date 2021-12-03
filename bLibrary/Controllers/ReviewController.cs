@@ -1,53 +1,69 @@
 ﻿using bLibrary.DBContext;
 using bLibrary.Models;
 using bLibrary.Models.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+using System.Linq;
 
 namespace bLibrary.Controllers
 {
     public class ReviewController : Controller
     {
         private readonly BLibraryContext bLibraryContext = BLibraryContext.CreateContext();
-        private AppUserManager AppUserManager
-        {
-            get { return HttpContext.GetOwinContext().GetUserManager<AppUserManager>(); }
-        }
         [HttpGet, Authorize]
-        public async Task<ActionResult> GetCreateReview(int id)
+        public ActionResult GetCreateEditReview(int id)
         {
-            Review review = new Review
+            Review review = bLibraryContext.Reviews.Include(x => x.Book).Include(x => x.User).Where(x => x.Book.BookId == id).Where(x => x.User.UserName == User.Identity.Name).FirstOrDefault();
+            if (review == null)
             {
-                Book = await bLibraryContext.Books.FindAsync(id),
-                User = await AppUserManager.FindByNameAsync(User.Identity.Name)
-            };
-            return View(review);
+                review = CreateReviewDraft(id);
+                return View("~/Views/Review/GetCreateReview.cshtml", review);
+            }
+            else
+            {
+                return View("~/Views/Review/GetEditReview.cshtml", review);
+            }
         }
         [HttpPost, Authorize]
         public async Task<ActionResult> CreateReview(Review review)
         {
             review.Book = await bLibraryContext.Books.FindAsync(review.Book.BookId);
-            review.User = await AppUserManager.FindByIdAsync(review.User.Id);
-            bLibraryContext.Reviews.Add(review);
+            review.User = bLibraryContext.Users.Where(x => x.UserName == review.User.UserName).FirstOrDefault() as User;
+            bLibraryContext.Entry(review).State = EntityState.Added;
             await bLibraryContext.SaveChangesAsync();
-            return RedirectToAction("GetBook", "Book", new { review.Book.BookId });
-        }
-        [HttpGet, Authorize]
-        public ActionResult GetEditReview(int id)
-        {
-            return View();
+            return RedirectToAction("GetBook", "Book", new { id = review.Book.BookId });
         }
         [HttpPost, Authorize]
         public async Task<ActionResult> EditReview(Review review)
         {
-            return View();
+            review.Book = await bLibraryContext.Books.FindAsync(review.Book.BookId);
+            review.User = bLibraryContext.Users.Where(x => x.UserName == review.User.UserName).FirstOrDefault() as User;
+            bLibraryContext.Entry(review).State = EntityState.Modified;
+            await bLibraryContext.SaveChangesAsync();
+            return RedirectToAction("GetBook", "Book", new { id = review.Book.BookId });
         }
-        [HttpPost, Authorize]
+        [HttpGet, Authorize]
         public async Task<ActionResult> DeleteReview(int id)
         {
-            return View();
+            Review review = await bLibraryContext.Reviews.FindAsync(id);
+            bLibraryContext.Entry(review).State = EntityState.Deleted;
+            await bLibraryContext.SaveChangesAsync();
+            return RedirectToAction("MainPage", "Home");
+        }
+        private Review CreateReviewDraft(int id)
+        {
+            return new Review
+            {
+                Book = new Book
+                {
+                    BookId = id
+                },
+                User = new User
+                {
+                    UserName = User.Identity.Name
+                }
+            };
         }
     }
 }

@@ -9,7 +9,6 @@
     @Html.AntiForgeryToken()
     <div>
         <hr />
-        @Html.ValidationSummary(false)
         <div>
             <table>
                 <tr>
@@ -51,20 +50,25 @@
                         <b><a download="@Model.Name" href="@Url.Content(System.Configuration.ConfigurationManager.AppSettings["EBook"] + Model.BookLink)">Скачать в PDF</a></b>
                     </td>
                     <td td width="400">
-                        <b><a href="/Review/GetCreateReview/@Model.BookId">Оставить отзыв о книге</a></b>
+                        <b><a href="/Review/GetCreateEditReview/@Model.BookId">Оставить отзыв о книге</a></b>
                     </td>
                 </tr>
             </table>
         </div>
+        <br/>
         <div>
-            <table>
+            <table width="1300">
+                <tr style="border: solid">
+                    <td style="border: solid"><p style="font-weight: bold">Дата написания</p></td>
+                    <td style="border: solid"><p style="font-weight: bold">Рекомендует автор отзыва книгу?</p></td>
+                    <td style="border: solid"><p style="font-weight: bold">Отзыв</p></td>
+                </tr>
                 @foreach (var review in Model.Reviews)
                 {
-                    <tr>
-                        @*<td>@review.User.UserName</td>*@
-                        <td>@review.CreateDate</td>
-                        <td>@review.IsRecommended</td>
-                        <td>@review.UserReview</td>
+                    <tr style="border: solid">
+                        <td style="border: solid">@review.CreateDate</td>
+                        <td style="border: solid">@(review.IsRecommended ? "Рекомендует" : "Не рекомендует")</td>
+                        <td style="border: solid">@review.UserReview</td>
                     </tr>
                 }
             </table>

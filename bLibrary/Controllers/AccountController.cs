@@ -41,11 +41,16 @@ namespace bLibrary.Controllers
             return View();
         }
         [HttpGet]
+        public ActionResult ForgotPasswordConfirm()
+        {
+            return View();
+        }
+        [HttpGet]
         public ActionResult ResetPassword(string code)
         {
             if(code == null)
             {
-
+                return new HttpStatusCodeResult(422, "Для сброса пароля необходим код");
             }
             return View(new ResetPasswordModel { Code = code });
         }
@@ -112,10 +117,10 @@ namespace bLibrary.Controllers
                 AppUserManager.UserTokenProvider = new DataProtectorTokenProvider<User>(provider.Create(user.UserName));
                 var code = await AppUserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account",
-                    new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    new { userId = user.Id, code }, protocol: Request.Url.Scheme);
                 await AppUserManager.SendEmailAsync(user.Id, "Сброс пароля",
                     "Для сброса пароля, перейдите по ссылке <a href=\"" + callbackUrl + "\">сбросить</a>");
-                return RedirectToAction("MainPage", "Home");
+                return RedirectToAction("ForgotPasswordConfirm", "Home");
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Некорректный запрос");
         }
@@ -134,7 +139,7 @@ namespace bLibrary.Controllers
                 IdentityResult result = await AppUserManager.ResetPasswordAsync(user.Id, resetPasswordModel.Code, resetPasswordModel.Password);
                 if(result.Succeeded)
                 {
-                    return RedirectToAction("MainPage", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Некорректный запрос");

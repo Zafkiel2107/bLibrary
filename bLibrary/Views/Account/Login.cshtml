@@ -9,7 +9,6 @@
     @Html.AntiForgeryToken()
     <div>
         <hr />
-        @Html.ValidationSummary(false)
         <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
         <div>
             @Html.LabelFor(x => x.UserName)

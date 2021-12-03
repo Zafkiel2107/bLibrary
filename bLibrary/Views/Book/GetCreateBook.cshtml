@@ -9,7 +9,6 @@
     @Html.AntiForgeryToken()
     <div>
         <hr />
-        @Html.ValidationSummary(false)
         <div>
             @Html.LabelFor(x => x.Name)
             <div>
@@ -54,6 +53,7 @@
             @Html.LabelFor(x => x.Genre.GenreName)
             <div>
                 @Html.DropDownListFor(model => model.Genre.GenreName, new SelectList(ViewBag.GenresList))
+                @Html.ValidationMessageFor(model => model.Genre)
             </div>
         </div>
         <br />
@@ -61,6 +61,7 @@
             @Html.LabelFor(x => x.Description)
             <div>
                 @Html.TextAreaFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
             </div>
         </div>
         <br />
@@ -68,10 +69,12 @@
             @Html.LabelFor(x => x.CoverLink)
             <div>
                 <input type="file" name="CoverLink" />
+                @Html.ValidationMessageFor(model => model.CoverLink)
             </div>
             @Html.LabelFor(x => x.BookLink)
             <div>
                 <input type="file" name="BookLink" />
+                @Html.ValidationMessageFor(model => model.BookLink)
             </div>
         </div>
         <br />

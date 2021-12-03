@@ -9,7 +9,6 @@
     @Html.AntiForgeryToken()
     <div>
         <hr />
-        @Html.ValidationSummary(false)
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.PasswordHash)
         @Html.HiddenFor(model => model.SecurityStamp)

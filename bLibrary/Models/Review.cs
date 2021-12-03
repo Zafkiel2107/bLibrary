@@ -9,13 +9,13 @@ namespace bLibrary.Models
     {
         [Key, Required, HiddenInput(DisplayValue = false)]
         public int ReviewId { get; set; }
-        [Required, Display(Name = "Статус")]
+        [Required(ErrorMessage = "Поле должно быть заполнено"), Display(Name = "Статус")]
         public Status Status { get; set; }
-        [Required, StringLength(1024), Display(Name = "Отзыв")]
+        [Required(ErrorMessage = "Поле должно быть заполнено"), StringLength(1024, ErrorMessage = "Недопустимая длина строки"), Display(Name = "Отзыв")]
         public string UserReview { get; set; }
-        [Required, Display(Name = "Рекомендация")]
+        [Required(ErrorMessage = "Поле должно быть заполнено"), Display(Name = "Рекомендация")]
         public bool IsRecommended { get; set; }
-        [Required, DataType(DataType.Date), Display(Name = "Дата написания")]
+        [DataType(DataType.Date), Display(Name = "Дата написания")]
         public DateTime CreateDate { get; set; }
         [Required]
         public Book Book { get; set; }
