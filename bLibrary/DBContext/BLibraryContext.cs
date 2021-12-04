@@ -14,5 +14,10 @@ namespace bLibrary.DBContext
         {
             return new BLibraryContext();
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<BLibraryContext>(null);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

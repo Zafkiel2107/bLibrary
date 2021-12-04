@@ -1,8 +1,7 @@
-﻿using bLibrary.DBContext;
-using bLibrary.Models;
+﻿using bLibrary.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace bLibrary.Tests.Controllers
 {
@@ -10,14 +9,22 @@ namespace bLibrary.Tests.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void MainPage()
+        [DataRow(2)]
+        [DataRow(null)]
+        public async Task MainPage(int? value)
         {
-            //List<Book> result;
-            //using(BLibraryContext bLibraryContext = BLibraryContext.CreateContext())
-            //{
-            //    result = bLibraryContext.Books.OrderBy(x => x.Name).Take(100).ToList();
-            //}
-            //Assert.IsNotNull(result);
+            HomeController homeController = new HomeController();
+            ViewResult viewResult = await homeController.MainPage(value) as ViewResult;
+            Assert.IsNotNull(viewResult);
+        }
+        [TestMethod]
+        [DataRow("name", 2)]
+        [DataRow("", null)]
+        public async Task Search(string name, int? value)
+        {
+            HomeController homeController = new HomeController();
+            ViewResult viewResult = await homeController.Search(name, value) as ViewResult;
+            Assert.IsNotNull(viewResult);
         }
     }
 }
