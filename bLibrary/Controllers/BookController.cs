@@ -13,21 +13,21 @@ namespace bLibrary.Controllers
     {
         private readonly BLibraryContext bLibraryContext = BLibraryContext.CreateContext();
         [HttpGet]
-        public ActionResult GetBook(int id)
+        public async Task<ActionResult> GetBook(int id)
         {
-            Book book = bLibraryContext.Books.Include(x => x.Genre).Include(x => x.Reviews).Where(x => x.BookId == id).FirstOrDefault();
+            Book book = await Task.Run(() => bLibraryContext.Books.Include(x => x.Genre).Include(x => x.Reviews).Where(x => x.BookId == id).FirstOrDefault());
             return View(book);
         }
         [HttpGet, Authorize(Roles = "Admin")]
-        public ActionResult GetCreateBook()
+        public async Task<ActionResult> GetCreateBook()
         {
-            ViewBag.GenresList = bLibraryContext.Genres.Select(x => x.GenreName).OrderBy(x => x);
+            ViewBag.GenresList = await Task.Run(() => bLibraryContext.Genres.Select(x => x.GenreName).OrderBy(x => x));
             return View();
         }
         [HttpPost, Authorize(Roles = "Admin")]
         public async Task<ActionResult> CreateBook(Book book)
         {
-            book.Genre = bLibraryContext.Genres.Where(x => x.GenreName == book.Genre.GenreName).FirstOrDefault();
+            book.Genre = await Task.Run(() => bLibraryContext.Genres.Where(x => x.GenreName == book.Genre.GenreName).FirstOrDefault());
             try
             {
                 if (!book.BookLink.Contains("pdf") && !book.CoverLink.Contains("jpg"))
@@ -44,16 +44,16 @@ namespace bLibrary.Controllers
             return RedirectToAction("MainPage", "Home");
         }
         [HttpGet, Authorize(Roles = "Admin")]
-        public ActionResult GetEditBook(int id)
+        public async Task<ActionResult> GetEditBook(int id)
         {
-            Book book = bLibraryContext.Books.Find(id);
-            ViewBag.GenresList = bLibraryContext.Genres.Select(x => x.GenreName).OrderBy(x => x);
+            Book book = await bLibraryContext.Books.FindAsync(id);
+            ViewBag.GenresList = await Task.Run(() => bLibraryContext.Genres.Select(x => x.GenreName).OrderBy(x => x));
             return View(book);
         }
         [HttpPost, Authorize(Roles = "Admin")]
         public async Task<ActionResult> EditBook(Book book)
         {
-            book.Genre = bLibraryContext.Genres.Where(x => x.GenreName == book.Genre.GenreName).FirstOrDefault(); //не работает
+            book.Genre = await Task.Run(() => bLibraryContext.Genres.Where(x => x.GenreName == book.Genre.GenreName).FirstOrDefault()); //не работает
             bLibraryContext.Entry(book).State = EntityState.Modified;
             await bLibraryContext.SaveChangesAsync();
             return RedirectToAction("AdminPanel", "Layout");
@@ -61,7 +61,7 @@ namespace bLibrary.Controllers
         [HttpPost, Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteBook(int id)
         {
-            Book book = bLibraryContext.Books.Find(id);
+            Book book = await bLibraryContext.Books.FindAsync(id);
             bLibraryContext.Books.Remove(book);
             await bLibraryContext.SaveChangesAsync();
             return RedirectToAction("AdminPanel", "Layout");

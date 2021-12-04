@@ -12,9 +12,9 @@ namespace bLibrary.Controllers
     {
         private readonly BLibraryContext bLibraryContext = BLibraryContext.CreateContext();
         [HttpGet, Authorize]
-        public ActionResult GetCreateEditReview(int id)
+        public async Task<ActionResult> GetCreateEditReview(int id)
         {
-            Review review = bLibraryContext.Reviews.Include(x => x.Book).Include(x => x.User).Where(x => x.Book.BookId == id).Where(x => x.User.UserName == User.Identity.Name).FirstOrDefault();
+            Review review = await Task.Run(() => bLibraryContext.Reviews.Include(x => x.Book).Include(x => x.User).Where(x => x.Book.BookId == id).Where(x => x.User.UserName == User.Identity.Name).FirstOrDefault());
             if (review == null)
             {
                 review = CreateReviewDraft(id);
@@ -29,7 +29,7 @@ namespace bLibrary.Controllers
         public async Task<ActionResult> CreateReview(Review review)
         {
             review.Book = await bLibraryContext.Books.FindAsync(review.Book.BookId);
-            review.User = bLibraryContext.Users.Where(x => x.UserName == review.User.UserName).FirstOrDefault() as User;
+            review.User = await Task.Run(() => bLibraryContext.Users.Where(x => x.UserName == review.User.UserName).FirstOrDefault()) as User;
             bLibraryContext.Entry(review).State = EntityState.Added;
             await bLibraryContext.SaveChangesAsync();
             return RedirectToAction("GetBook", "Book", new { id = review.Book.BookId });
@@ -38,7 +38,7 @@ namespace bLibrary.Controllers
         public async Task<ActionResult> EditReview(Review review)
         {
             review.Book = await bLibraryContext.Books.FindAsync(review.Book.BookId);
-            review.User = bLibraryContext.Users.Where(x => x.UserName == review.User.UserName).FirstOrDefault() as User;
+            review.User = await Task.Run(() => bLibraryContext.Users.Where(x => x.UserName == review.User.UserName).FirstOrDefault()) as User;
             bLibraryContext.Entry(review).State = EntityState.Modified;
             await bLibraryContext.SaveChangesAsync();
             return RedirectToAction("GetBook", "Book", new { id = review.Book.BookId });

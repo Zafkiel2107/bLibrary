@@ -11,17 +11,17 @@ namespace bLibrary.Controllers
     {
         private readonly BLibraryContext bLibraryContext = BLibraryContext.CreateContext();
         [HttpGet, Authorize(Roles = "Admin")]
-        public ActionResult GetEditRole(string id)
+        public async Task<ActionResult> GetEditRole(string id)
         {
-            IdentityUserRole identityUserRole = bLibraryContext.Users.Find(id).Roles.FirstOrDefault();
-            ViewBag.RoleList = bLibraryContext.Roles.Select(x => x.Name);
+            IdentityUserRole identityUserRole = await Task.Run(() => bLibraryContext.Users.Find(id).Roles.FirstOrDefault());
+            ViewBag.RoleList = await Task.Run(() => bLibraryContext.Roles.Select(x => x.Name));
             return View(identityUserRole);
         }
         [HttpPost, Authorize(Roles = "Admin")]
         public async Task<ActionResult> EditRole(IdentityUserRole identityUserRole)
         {
-            identityUserRole.RoleId = bLibraryContext.Roles.Where(x => x.Name == identityUserRole.RoleId).Select(x => x.Id).FirstOrDefault();
-            IdentityUser identityUser = bLibraryContext.Users.Find(identityUserRole.UserId);
+            identityUserRole.RoleId = await Task.Run(() => bLibraryContext.Roles.Where(x => x.Name == identityUserRole.RoleId).Select(x => x.Id).FirstOrDefault());
+            IdentityUser identityUser = await Task.Run(() => bLibraryContext.Users.Find(identityUserRole.UserId));
             identityUser.Roles.Clear();
             identityUser.Roles.Add(identityUserRole);
             bLibraryContext.Entry(identityUser).State = EntityState.Modified;

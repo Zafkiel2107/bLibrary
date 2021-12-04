@@ -11,16 +11,16 @@ namespace bLibrary.Controllers
     {
         private readonly BLibraryContext bLibraryContext = BLibraryContext.CreateContext();
         [HttpGet, Authorize(Roles = "Admin")]
-        public ActionResult AdminPanel()
+        public async Task<ActionResult> AdminPanel()
         {
-            ViewBag.Books = bLibraryContext.Books;
-            ViewBag.Users = bLibraryContext.Users;
+            ViewBag.Books = await Task.Run(() => bLibraryContext.Books);
+            ViewBag.Users = await Task.Run(() => bLibraryContext.Users); 
             return View();
         }
         [HttpGet, Authorize]
-        public ActionResult Settings()
+        public async Task<ActionResult> Settings()
         {
-            IdentityUser user = bLibraryContext.Users.Find(User.Identity.GetUserId());
+            IdentityUser user = await Task.Run(() => bLibraryContext.Users.Find(User.Identity.GetUserId()));
             return View(user);
         }
         [HttpPost, Authorize]
@@ -28,7 +28,7 @@ namespace bLibrary.Controllers
         {
             bLibraryContext.Entry(identityUser).State = EntityState.Modified;
             await bLibraryContext.SaveChangesAsync();
-            return RedirectToAction("Settings", "Layout");
+            return RedirectToAction("AdminPanel", "Layout");
         }
     }
 }
