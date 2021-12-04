@@ -112,6 +112,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AccountControllerTest.cs" />
     <Compile Include="Controllers\LayoutControllerTest.cs" />
     <Compile Include="Controllers\ReviewControllerTest.cs" />
     <Compile Include="Controllers\RoleControllerTest.cs" />
