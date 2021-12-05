@@ -62,7 +62,7 @@ namespace bLibrary.Controllers
                 IdentityResult identityRoleResult = await AppUserManager.AddToRoleAsync(user.Id, "User");
                 if(identityUserResult.Succeeded && identityRoleResult.Succeeded)
                 {
-                    return RedirectToAction("MainPage", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Некорректный запрос");
@@ -112,7 +112,7 @@ namespace bLibrary.Controllers
                     new { userId = user.Id, code }, protocol: Request.Url.Scheme);
                 await AppUserManager.SendEmailAsync(user.Id, "Сброс пароля",
                     "Для сброса пароля, перейдите по ссылке <a href=\"" + callbackUrl + "\">сбросить</a>");
-                return RedirectToAction("ForgotPasswordConfirm", "Home");
+                return RedirectToAction("ForgotPasswordConfirm", "Account");
             }
             else
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Некорректный запрос");

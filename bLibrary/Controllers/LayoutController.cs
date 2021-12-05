@@ -33,7 +33,7 @@ namespace bLibrary.Controllers
             {
                 bLibraryContext.Entry(identityUser).State = EntityState.Modified;
                 await bLibraryContext.SaveChangesAsync();
-                return RedirectToAction("AdminPanel", "Layout");
+                return RedirectToAction("MainPage", "Home");
             }
             else
                 return new HttpStatusCodeResult(422, "Необрабатываемая сущность");

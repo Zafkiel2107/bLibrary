@@ -28,4 +28,3 @@ namespace bLibrary.Controllers
         }
     }
 }
-//TODO: протестировать программу, рефакторинг,

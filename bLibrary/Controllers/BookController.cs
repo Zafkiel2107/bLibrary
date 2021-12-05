@@ -42,7 +42,7 @@ namespace bLibrary.Controllers
                 }
                 bLibraryContext.Books.Add(book);
                 await bLibraryContext.SaveChangesAsync();
-                return RedirectToAction("MainPage", "Home");
+                return RedirectToAction("AdminPanel", "Layout");
             }
             else
                 return new HttpStatusCodeResult(422, "Необрабатываемая сущность");
