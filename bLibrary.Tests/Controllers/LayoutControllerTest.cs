@@ -1,5 +1,4 @@
 ﻿using bLibrary.Controllers;
-using bLibrary.DBContext;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;

@@ -14,21 +14,29 @@ namespace bLibrary.Controllers
         public async Task<ActionResult> AdminPanel()
         {
             ViewBag.Books = await Task.Run(() => bLibraryContext.Books);
-            ViewBag.Users = await Task.Run(() => bLibraryContext.Users); 
+            ViewBag.Users = await Task.Run(() => bLibraryContext.Users);
             return View();
         }
         [HttpGet, Authorize]
         public async Task<ActionResult> Settings()
         {
             IdentityUser user = await Task.Run(() => bLibraryContext.Users.Find(User.Identity.GetUserId()));
-            return View(user);
+            if (user != null)
+                return View(user);
+            else
+                return HttpNotFound();
         }
         [HttpPost, Authorize]
         public async Task<ActionResult> EditSettings(IdentityUser identityUser)
         {
-            bLibraryContext.Entry(identityUser).State = EntityState.Modified;
-            await bLibraryContext.SaveChangesAsync();
-            return RedirectToAction("AdminPanel", "Layout");
+            if(ModelState.IsValid)
+            {
+                bLibraryContext.Entry(identityUser).State = EntityState.Modified;
+                await bLibraryContext.SaveChangesAsync();
+                return RedirectToAction("AdminPanel", "Layout");
+            }
+            else
+                return new HttpStatusCodeResult(422, "Необрабатываемая сущность");
         }
     }
 }

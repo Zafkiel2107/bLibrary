@@ -25,10 +25,7 @@ namespace bLibrary.Controllers
             get { return HttpContext.GetOwinContext().Authentication; }
         }
         [HttpGet]
-        public ActionResult Register()
-        {
-            return View();
-        }
+        public ActionResult Register() => View();
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
@@ -36,15 +33,10 @@ namespace bLibrary.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
+        public ActionResult ForgotPassword() => View();
+
         [HttpGet]
-        public ActionResult ForgotPasswordConfirm()
-        {
-            return View();
-        }
+        public ActionResult ForgotPasswordConfirm() => View();
         [HttpGet]
         public ActionResult ResetPassword(string code)
         {
@@ -122,7 +114,8 @@ namespace bLibrary.Controllers
                     "Для сброса пароля, перейдите по ссылке <a href=\"" + callbackUrl + "\">сбросить</a>");
                 return RedirectToAction("ForgotPasswordConfirm", "Home");
             }
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Некорректный запрос");
+            else
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Некорректный запрос");
         }
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordModel resetPasswordModel)
