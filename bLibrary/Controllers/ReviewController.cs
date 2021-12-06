@@ -1,4 +1,5 @@
 ﻿using bLibrary.DBContext;
+using bLibrary.Interfaces;
 using bLibrary.Models;
 using bLibrary.Models.Identity;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace bLibrary.Controllers
 {
-    public class ReviewController : Controller
+    public class ReviewController : Controller, IRepository<ActionResult, Review>
     {
         private readonly BLibraryContext bLibraryContext = BLibraryContext.CreateContext();
         [HttpGet, Authorize]
@@ -31,7 +32,7 @@ namespace bLibrary.Controllers
                 return HttpNotFound();
         }
         [HttpPost, Authorize]
-        public async Task<ActionResult> CreateReview(Review review)
+        public async Task<ActionResult> Create(Review review)
         {
             review.Book = await bLibraryContext.Books.FindAsync(review.Book.BookId);
             review.User = await Task.Run(() => bLibraryContext.Users.Where(x => x.UserName == review.User.UserName).FirstOrDefault()) as User;
@@ -45,7 +46,7 @@ namespace bLibrary.Controllers
                 return new HttpStatusCodeResult(422, "Необрабатываемая сущность");
         }
         [HttpPost, Authorize]
-        public async Task<ActionResult> EditReview(Review review)
+        public async Task<ActionResult> Edit(Review review)
         {
             review.Book = await bLibraryContext.Books.FindAsync(review.Book.BookId);
             review.User = await Task.Run(() => bLibraryContext.Users.Where(x => x.UserName == review.User.UserName).FirstOrDefault()) as User;
@@ -59,7 +60,7 @@ namespace bLibrary.Controllers
                 return new HttpStatusCodeResult(422, "Необрабатываемая сущность");
         }
         [HttpGet, Authorize]
-        public async Task<ActionResult> DeleteReview(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if(id != null)
             {

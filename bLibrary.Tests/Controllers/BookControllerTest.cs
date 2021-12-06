@@ -43,7 +43,7 @@ namespace bLibrary.Tests.Controllers
                 CoverLink = "dostoyevsky.jpg"
             };
             BookController bookController = new BookController();
-            ViewResult viewResult = await bookController.CreateBook(book) as ViewResult;
+            ViewResult viewResult = await bookController.Create(book) as ViewResult;
             Assert.IsNotNull(viewResult);
         }
         [TestMethod]
@@ -70,7 +70,7 @@ namespace bLibrary.Tests.Controllers
                 CoverLink = "dostoyevsky.jpg"
             };
             BookController bookController = new BookController();
-            ViewResult viewResult = await bookController.EditBook(book) as ViewResult;
+            ViewResult viewResult = await bookController.Edit(book) as ViewResult;
             Assert.IsNotNull(viewResult);
         }
         [TestMethod]
@@ -78,7 +78,7 @@ namespace bLibrary.Tests.Controllers
         public async Task DeleteBook(int value)
         {
             BookController bookController = new BookController();
-            ViewResult viewResult = await bookController.DeleteBook(value) as ViewResult;
+            ViewResult viewResult = await bookController.Delete(value) as ViewResult;
             Assert.IsNotNull(viewResult);
         }
     }

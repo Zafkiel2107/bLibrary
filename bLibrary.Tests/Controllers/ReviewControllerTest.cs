@@ -33,7 +33,7 @@ namespace bLibrary.Tests.Controllers
                 UserReview = "Хорошая книга"
             };
             ReviewController reviewController = new ReviewController();
-            ViewResult viewResult = await reviewController.CreateReview(review) as ViewResult;
+            ViewResult viewResult = await reviewController.Create(review) as ViewResult;
             Assert.IsNotNull(viewResult);
         }
         [TestMethod]
@@ -48,7 +48,7 @@ namespace bLibrary.Tests.Controllers
                 UserReview = "Хорошая книга"
             };
             ReviewController reviewController = new ReviewController();
-            ViewResult viewResult = await reviewController.EditReview(review) as ViewResult;
+            ViewResult viewResult = await reviewController.Edit(review) as ViewResult;
             Assert.IsNotNull(viewResult);
         }
         [TestMethod]
@@ -56,7 +56,7 @@ namespace bLibrary.Tests.Controllers
         public async Task DeleteReview(int value)
         {
             ReviewController reviewController = new ReviewController();
-            ViewResult viewResult = await reviewController.DeleteReview(value) as ViewResult;
+            ViewResult viewResult = await reviewController.Delete(value) as ViewResult;
             Assert.IsNotNull(viewResult);
         }
     }

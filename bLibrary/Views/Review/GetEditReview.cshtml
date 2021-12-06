@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Редактирование отзыва</h2>
-@using (Html.BeginForm("EditReview", "Review", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Review", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div>
@@ -44,7 +44,7 @@
             </div>
             <br />
             <div>
-                <input type="button" value="Удалить" onclick="location.href='/Review/DeleteReview/@Model.ReviewId'" />
+                <input type="button" value="Удалить" onclick="location.href='/Review/Delete/@Model.ReviewId'" />
             </div>
         </div>
     </div>

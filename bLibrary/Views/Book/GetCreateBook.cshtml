@@ -4,7 +4,7 @@
 }
 
 <h2>Панель создания книги</h2>
-@using (Html.BeginForm("CreateBook", "Book", FormMethod.Post))
+@using (Html.BeginForm("Create", "Book", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div>

@@ -1,4 +1,5 @@
 ﻿using bLibrary.DBContext;
+using bLibrary.Interfaces;
 using bLibrary.Models;
 using System.Data.Entity;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace bLibrary.Controllers
 {
-    public class BookController : Controller
+    public class BookController : Controller, IRepository<ActionResult, Book>
     {
         private readonly BLibraryContext bLibraryContext = BLibraryContext.CreateContext();
         [HttpGet]
@@ -31,7 +32,7 @@ namespace bLibrary.Controllers
             return View();
         }
         [HttpPost, Authorize(Roles = "Admin")]
-        public async Task<ActionResult> CreateBook(Book book)
+        public async Task<ActionResult> Create(Book book)
         {
             book.Genre = await Task.Run(() => bLibraryContext.Genres.Where(x => x.GenreName == book.Genre.GenreName).FirstOrDefault());
             if (ModelState.IsValid)
@@ -63,7 +64,7 @@ namespace bLibrary.Controllers
                 return HttpNotFound();
         }
         [HttpPost, Authorize(Roles = "Admin")]
-        public async Task<ActionResult> EditBook(Book book)
+        public async Task<ActionResult> Edit(Book book)
         {
             book.Genre = await Task.Run(() => bLibraryContext.Genres.Where(x => x.GenreName == book.Genre.GenreName).FirstOrDefault()); //не работает
             if (ModelState.IsValid)
@@ -76,7 +77,7 @@ namespace bLibrary.Controllers
                 return new HttpStatusCodeResult(422, "Необрабатываемая сущность");
         }
         [HttpPost, Authorize(Roles = "Admin")]
-        public async Task<ActionResult> DeleteBook(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id != null)
             {

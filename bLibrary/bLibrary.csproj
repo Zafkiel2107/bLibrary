@@ -180,6 +180,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Migrations\202111221442383_1.cs" />
     <Compile Include="Migrations\202111221442383_1.Designer.cs">
       <DependentUpon>202111221442383_1.cs</DependentUpon>
